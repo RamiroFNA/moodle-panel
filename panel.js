@@ -12,7 +12,7 @@
     const scriptDatos = document.createElement("script");
 
     scriptDatos.src =
-        "TU_URL_APPS_SCRIPT";
+        "https://script.google.com/a/macros/espe.edu.ec/s/AKfycbxJJPjSRxTT3JqMdi32wTZvQdDBU8xQnvMAPmgAqr4UfYC8X5OrDduNH0b2DaeiDISr/exec";
 
     scriptDatos.onload = function () {
 

@@ -2,22 +2,52 @@
 
     const panel = document.getElementById("panel-moodle");
 
-    if (!panel) {
-        return;
-    }
+    if (!panel) return;
 
     const nrc = panel.dataset.nrc;
 
-    panel.innerHTML = `
-        <div style="
-            padding:15px;
-            border:2px solid #198754;
-            border-radius:8px;
-            margin:10px 0;
-        ">
-            <strong>✅ PANEL CENTRAL CONECTADO</strong><br>
-            NRC detectado: ${nrc}
-        </div>
-    `;
+    panel.innerHTML =
+        "⏳ Cargando configuración institucional...";
+
+    const scriptDatos = document.createElement("script");
+
+    scriptDatos.src =
+        "TU_URL_APPS_SCRIPT";
+
+    scriptDatos.onload = function () {
+
+        if (!window.CONFIG_MOODLE) {
+            panel.innerHTML =
+                "❌ Se cargó Apps Script, pero no llegó la configuración.";
+            return;
+        }
+
+        const clase = window.CONFIG_MOODLE.find(item =>
+            item.nrc === "TODOS" &&
+            item.elemento === "CLASE"
+        );
+
+        if (!clase) {
+            panel.innerHTML =
+                "⚠️ Configuración recibida, pero no se encontró CLASE.";
+            return;
+        }
+
+        panel.innerHTML =
+            "✅ CONFIGURACIÓN RECIBIDA" +
+            "<br><br>" +
+            "<strong>NRC del aula:</strong> " + nrc +
+            "<br>" +
+            "<strong>Título:</strong> " + clase.titulo +
+            "<br>" +
+            "<strong>Contenido:</strong> " + clase.contenido;
+    };
+
+    scriptDatos.onerror = function () {
+        panel.innerHTML =
+            "❌ No se pudo cargar la configuración institucional.";
+    };
+
+    document.head.appendChild(scriptDatos);
 
 })();

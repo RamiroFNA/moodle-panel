@@ -173,6 +173,15 @@ function mostrarImagen(item) {
                     <div>
                         ${saltos(noticias.contenido)}
                     </div>
+                  <div style="
+                        margin-top:10px;
+                        padding:10px;
+                        background:#fff3cd;
+                        border:1px solid #ffc107;
+                    ">
+                        <strong>PRUEBA IMAGEN:</strong><br>
+                        ${saltos(noticias.imagen || "NO SE RECIBIÓ NINGÚN ENLACE")}
+                    </div>
                     ${mostrarImagen(noticias)}
                 </div>
             `;
